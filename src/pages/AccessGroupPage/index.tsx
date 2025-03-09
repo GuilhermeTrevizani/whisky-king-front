@@ -8,6 +8,7 @@ import AccessGroupResponse from '../../types/AccessGroupResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const AccessGroupPage = () => {
   const { t } = useTranslation();
@@ -17,19 +18,20 @@ const AccessGroupPage = () => {
   const [permissions, setPermissions] = useState<PermissionResponse[]>();
   const [accessGroup, setAccessGroup] = useState<AccessGroupResponse>(null!);
   const { user } = useAuth();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       if (accessGroup?.id) {
         await api.updateAccessGroup(accessGroup);
-        alert(t('recordSaveSuccess'));
+        notification.alert('success', t('recordSaveSuccess'));
         return;
       }
 
       await api.createAccessGroup({ ...accessGroup });
       navigate('/accessgroups');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -45,7 +47,7 @@ const AccessGroupPage = () => {
           setAccessGroup(res);
         })
         .catch((res) => {
-          alert(res);
+          notification.alert('error', res);
           navigate('/accessgroup');
         });
   }, [id]);

@@ -5,6 +5,7 @@ import SaleInvoiceResponse from '../../types/SaleInvoiceResponse';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { formatCurrency } from '../../services/format';
+import { useNotification } from '../../hooks/useNotification';
 
 const SaleInvoicePage = () => {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ const SaleInvoicePage = () => {
   const navigate = useNavigate();
   const [sale, setSale] = useState<SaleInvoiceResponse>();
   const separator = new Array(42 + 1).join('-');
+  const notification = useNotification();
 
   useEffect(() => {
     if (!id) {
@@ -26,7 +28,7 @@ const SaleInvoicePage = () => {
         setTimeout(() => window.print(), 200);
       })
       .catch((res) => {
-        alert(res);
+        notification.alert('error', res);
         navigate('/sales');
       });
   }, [id]);

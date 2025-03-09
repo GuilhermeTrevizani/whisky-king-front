@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useApi } from '../../hooks/useApi';
 import LayoutPage from '../LayoutPage';
+import { useNotification } from '../../hooks/useNotification';
 
 const ChangePasswordPage = () => {
   const { t } = useTranslation();
@@ -10,13 +11,14 @@ const ChangePasswordPage = () => {
   const [newPassword, setNewPassword] = useState('');
   const [repeatNewPassword, setRepeatNewPassword] = useState('');
   const api = useApi();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       await api.changePassword({ currentPassword, newPassword, repeatNewPassword });
-      alert(t('changePasswordSuccess'));
-    } catch (ex) {
-      alert(ex);
+      notification.alert('success', t('changePasswordSuccess'));
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 

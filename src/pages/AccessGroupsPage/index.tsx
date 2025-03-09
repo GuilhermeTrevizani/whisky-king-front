@@ -9,6 +9,7 @@ import { ColumnsType } from 'antd/es/table';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const AccessGroupsPage = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const AccessGroupsPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const notification = useNotification();
 
   const columns: ColumnsType<AccessGroupPaginationResponse> = [
     {
@@ -51,8 +53,8 @@ const AccessGroupsPage = () => {
       .then(res => {
         setAccessGroups(res.data);
       })
-      .catch((ex) => {
-        alert(ex);
+      .catch((ex: any) => {
+        notification.alert('error', ex);
       })
       .finally(() => {
         setLoading(false);

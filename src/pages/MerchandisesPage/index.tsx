@@ -10,6 +10,7 @@ import { ColumnsType } from 'antd/es/table';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const MerchandisesPage = () => {
   const { t } = useTranslation();
@@ -18,6 +19,7 @@ const MerchandisesPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const notification = useNotification();
 
   const columns: ColumnsType<MerchandisePaginationResponse> = [
     {
@@ -60,7 +62,7 @@ const MerchandisesPage = () => {
         setMerchandises(res.data);
       })
       .catch((ex) => {
-        alert(ex);
+        notification.alert('error', ex);
       })
       .finally(() => {
         setLoading(false);

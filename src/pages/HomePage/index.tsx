@@ -134,7 +134,7 @@ const HomePage = () => {
             </Col>
           </Row>
         </Form>
-        <Row gutter={16} style={{ textAlign: 'center' }}>
+        {(paymentMethodsChat.labels?.length ?? 0) > 0 && <Row gutter={16} style={{ textAlign: 'center' }}>
           <Col span={8}>
             <Card>
               <h3>{t('10CategoriesBestSellersByValue')}</h3>
@@ -162,7 +162,7 @@ const HomePage = () => {
               />
             </Card>
           </Col>
-        </Row>
+        </Row>}
       </>
     </LayoutPage>
   );

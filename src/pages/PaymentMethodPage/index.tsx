@@ -7,6 +7,7 @@ import PaymentMethodResponse from '../../types/PaymentMethodResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const PaymentMethodPage = () => {
   const { t } = useTranslation();
@@ -15,19 +16,20 @@ const PaymentMethodPage = () => {
   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethodResponse>(null!);
   const { user } = useAuth();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       if (paymentMethod?.id) {
         await api.updatePaymentMethod(paymentMethod);
-        alert(t('recordSaveSuccess'));
+        notification.alert('success', t('recordSaveSuccess'));
         return;
       }
 
       await api.createPaymentMethod({ ...paymentMethod });
       navigate('/paymentmethods');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -38,7 +40,7 @@ const PaymentMethodPage = () => {
           setPaymentMethod(res);
         })
         .catch((res) => {
-          alert(res);
+          notification.alert('error', res);
           navigate('/paymentmethod');
         });
   }, [id]);

@@ -8,6 +8,7 @@ import CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const MerchandisePage = () => {
   const { t } = useTranslation();
@@ -17,19 +18,20 @@ const MerchandisePage = () => {
   const [merchandise, setMerchandise] = useState<MerchandiseResponse>(null!);
   const [categories, setCategories] = useState<CategoryPaginationResponse[]>();
   const { user } = useAuth();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       if (merchandise?.id) {
         await api.updateMerchandise(merchandise);
-        alert(t('recordSaveSuccess'));
+        notification.alert('success', t('recordSaveSuccess'));
         return;
       }
 
       await api.createMerchandise({ ...merchandise });
       navigate('/merchandises');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -45,7 +47,7 @@ const MerchandisePage = () => {
           setMerchandise(res);
         })
         .catch((res) => {
-          alert(res);
+          notification.alert('error', res);
           navigate('/merchandise');
         });
   }, [id]);

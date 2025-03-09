@@ -13,6 +13,7 @@ import { formatCurrency } from '../../services/format';
 import { SaveOutlined, DeleteOutlined } from '@ant-design/icons';
 import LayoutPage from '../LayoutPage';
 import CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
+import { useNotification } from '../../hooks/useNotification';
 
 const SalePage = () => {
   const { t } = useTranslation();
@@ -45,9 +46,11 @@ const SalePage = () => {
 
   const [details, setDetails] = useState<{ label: string, value: string }[]>([]);
 
+  const notification = useNotification();
+
   useEffect(() => {
     const merchandise = merchandises?.find(x => x.id === selectedMerchandise?.merchandiseId);
-    if(!merchandise?.categoryId)
+    if (!merchandise?.categoryId)
       return;
 
     const category = categories?.find(x => x.id === merchandise.categoryId);
@@ -155,18 +158,18 @@ const SalePage = () => {
 
   const handleAddMerchandise = () => {
     if (!selectedMerchandise.merchandiseId) {
-      alert(t('noMerchandiseSelected'));
+      notification.alert('error', t('noMerchandiseSelected'));
       return;
     }
 
     if (selectedMerchandise.quantity <= 0) {
-      alert(t('invalidQuantity'));
+      notification.alert('error', t('invalidQuantity'));
       return;
     }
 
     const amount = selectedMerchandise.quantity * selectedMerchandisePrice - selectedMerchandise.discount;
     if (amount < 0) {
-      alert(t('invalidDiscount'));
+      notification.alert('error', t('invalidDiscount'));
       return;
     }
 
@@ -189,12 +192,12 @@ const SalePage = () => {
 
   const handleAddPaymentMethod = () => {
     if (!selectedPaymentMethod.paymentMethodId) {
-      alert(t('noPaymentMethodSelected'));
+      notification.alert('error', t('noPaymentMethodSelected'));
       return;
     }
 
     if (selectedPaymentMethod.value <= 0) {
-      alert(t('invalidValue'));
+      notification.alert('error', t('invalidValue'));
       return;
     }
 
@@ -213,8 +216,8 @@ const SalePage = () => {
 
       const res = await api.startShift();
       setShift(res);
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -235,8 +238,8 @@ const SalePage = () => {
       localStorage.removeItem('SALE');
       window.open(`/sale/invoice/${id}`);
       navigate('/sales');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 

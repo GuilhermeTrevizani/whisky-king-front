@@ -2,6 +2,7 @@ import { createContext, ReactElement } from 'react';
 import LoginResponse from '../types/LoginResponse';
 import { useState, useEffect } from 'react';
 import { useApi } from '../hooks/useApi';
+import { useNotification } from '../hooks/useNotification';
 
 export type AuthContextType = {
   user: LoginResponse | null;
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [user, setUser] = useState<LoginResponse | null>(null);
   const [loading, setIsLoading] = useState<boolean>(true);
   const api = useApi();
+  const notification = useNotification();
 
   useEffect(() => {
     const token = localStorage.getItem('TOKEN');
@@ -36,8 +38,8 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       localStorage.setItem('TOKEN', data.token);
       localStorage.setItem('NAME', data.name);
       localStorage.setItem('PERMISSIONS', JSON.stringify(data.permissions));
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
       return false;
     }
     return true;

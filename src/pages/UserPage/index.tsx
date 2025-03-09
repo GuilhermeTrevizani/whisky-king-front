@@ -8,6 +8,7 @@ import UserResponse from '../../types/UserResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const UserPage = () => {
   const { t } = useTranslation();
@@ -17,19 +18,20 @@ const UserPage = () => {
   const [accessGroups, setAccessGroups] = useState<AccessGroupPaginationResponse[]>();
   const [user, setUser] = useState<UserResponse>(null!);
   const authenticatedUser = useAuth().user;
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       if (user?.id) {
         await api.updateUser(user);
-        alert(t('recordSaveSuccess'));
+        notification.alert('success', t('recordSaveSuccess'));
         return;
       }
 
       await api.createUser({ ...user });
       navigate('/users');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -45,7 +47,7 @@ const UserPage = () => {
           setUser(res);
         })
         .catch((res) => {
-          alert(res);
+          notification.alert('error', res);
           navigate('/user');
         });
   }, [id]);

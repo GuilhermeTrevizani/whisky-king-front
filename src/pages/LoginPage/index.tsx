@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Form, Row } from 'antd';
 import icon from '../../assets/icon.png';
+import { useNotification } from '../../hooks/useNotification';
 
 const LoginPage = () => {
   const [login, setLogin] = useState('');
@@ -11,20 +12,21 @@ const LoginPage = () => {
   const { authenticate } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       const success = await authenticate(login, password);
       if (success)
         navigate('/');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
   return (
-    <Row itemType='flex' justify='center' align='middle'>
-      <Form layout='vertical' labelCol={{span: 6}} wrapperCol={{span: 18}} style={{ width: '20%' }}>
+    <Row itemType='flex' justify='center' align='middle' style={{ backgroundColor: '#000', height: '100vh' }}>
+      <Form layout='vertical' labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} style={{ width: '20%' }}>
         <Form.Item>
           <img src={icon} width={200} />
         </Form.Item>

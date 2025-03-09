@@ -7,6 +7,7 @@ import CategoryResponse from '../../types/CategoryResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const CategoryPage = () => {
   const { t } = useTranslation();
@@ -15,19 +16,20 @@ const CategoryPage = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState<CategoryResponse>(null!);
   const { user } = useAuth();
+  const notification = useNotification();
 
   const handleSubmit = async () => {
     try {
       if (category?.id) {
         await api.updateCategory(category);
-        alert(t('recordSaveSuccess'));
+        notification.alert('success', t('recordSaveSuccess'));
         return;
       }
 
       await api.createCategory({ ...category });
       navigate('/categories');
-    } catch (ex) {
-      alert(ex);
+    } catch (ex: any) {
+      notification.alert('error', ex);
     }
   };
 
@@ -38,7 +40,7 @@ const CategoryPage = () => {
           setCategory(res);
         })
         .catch((res) => {
-          alert(res);
+          notification.alert('error', res);
           navigate('/category');
         });
   }, [id]);

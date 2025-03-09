@@ -9,6 +9,7 @@ import { ColumnsType } from 'antd/es/table';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
+import { useNotification } from '../../hooks/useNotification';
 
 const UsersPage = () => {
   const { t } = useTranslation();
@@ -17,7 +18,8 @@ const UsersPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  
+  const notification = useNotification();
+
   const columns: ColumnsType<UserPaginationResponse> = [
     {
       title: t('id'),
@@ -57,7 +59,7 @@ const UsersPage = () => {
         setUsers(res.data);
       })
       .catch((ex) => {
-        alert(ex);
+        notification.alert('error', ex);
       })
       .finally(() => {
         setLoading(false);
