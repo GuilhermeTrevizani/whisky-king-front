@@ -3,16 +3,16 @@ import { useApi } from '../../hooks/useApi';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Form, Table, Select, Divider, Row, Col, Popconfirm, AutoComplete } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { CreateSaleRequestMerchandise, CreateSaleRequestPaymentMethod } from '../../types/CreateSaleRequest';
-import MerchandisePaginationResponse from '../../types/MerchandisePaginationResponse';
-import PaymentMethodPaginationResponse from '../../types/PaymentMethodPaginationResponse';
-import ShiftResponse from '../../types/ShiftResponse';
+import { type CreateSaleRequestMerchandise, type CreateSaleRequestPaymentMethod } from '../../types/CreateSaleRequest';
+import type MerchandisePaginationResponse from '../../types/MerchandisePaginationResponse';
+import type PaymentMethodPaginationResponse from '../../types/PaymentMethodPaginationResponse';
+import type ShiftResponse from '../../types/ShiftResponse';
 import moment from 'moment';
-import { ColumnsType } from 'antd/es/table';
+import { type ColumnsType } from 'antd/es/table';
 import { formatCurrency } from '../../services/format';
 import { SaveOutlined, DeleteOutlined } from '@ant-design/icons';
 import LayoutPage from '../LayoutPage';
-import CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
+import type CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
 import { useNotification } from '../../hooks/useNotification';
 
 const SalePage = () => {
@@ -138,12 +138,12 @@ const SalePage = () => {
   ];
 
   const handleDeleteMerchandise = (index: number) => {
-    setSaleMerchandises([...saleMerchandises.filter((x, i) => i != index)]);
+    setSaleMerchandises([...saleMerchandises.filter((_, i) => i != index)]);
     setSaleLocalStorage();
   };
 
   const handleDeletePaymentMethod = (index: number) => {
-    setSalePaymentMethods([...salePaymentMethods.filter((x, i) => i != index)]);
+    setSalePaymentMethods([...salePaymentMethods.filter((_, i) => i != index)]);
     setSaleLocalStorage();
   };
 
@@ -301,7 +301,7 @@ const SalePage = () => {
             </Popconfirm>
           </Col>
           <Col span={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button onClick={handleCancel} style={{ marginRight: 10 }}>Cancelar</Button>
+            <Button onClick={handleCancel} style={{ marginRight: 10 }}>{t('cancel')}</Button>
             <Button type='primary' onClick={handleSubmit}>{t('finish')} ({formatCurrency(getSaleAmount())})</Button>
           </Col>
         </Row>

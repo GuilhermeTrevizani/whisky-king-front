@@ -56,5 +56,6 @@
   "discount": "Discount",
   "invalidDiscount": "Invalid discount.",
   "noPaymentMethodSelected": "No payment method selected.",
-  "details": "Notes"
+  "details": "Notes",
+  "cancel": "Cancel"
 }

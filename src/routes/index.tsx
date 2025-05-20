@@ -17,7 +17,7 @@ import SalesPage from './../pages/SalesPage';
 import SalePage from './../pages/SalePage';
 import SaleInvoicePage from './../pages/SaleInvoicePage';
 import { Permission } from '../types/Permission';
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 const RequireAuth = ({ children, permission }: { children: ReactElement, permission?: Permission }) => {
   const { user, loading } = useAuth();

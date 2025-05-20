@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
-import { Button, Input, Form, Checkbox, Select } from 'antd';
+import { Button, Input, Form, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
-import PaymentMethodResponse from '../../types/PaymentMethodResponse';
+import type PaymentMethodResponse from '../../types/PaymentMethodResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';

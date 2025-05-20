@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
-import SaleInvoiceResponse from '../../types/SaleInvoiceResponse';
+import type SaleInvoiceResponse from '../../types/SaleInvoiceResponse';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { formatCurrency } from '../../services/format';

@@ -4,11 +4,11 @@ import { useApi } from '../../hooks/useApi';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
-import ShiftResponse from '../../types/ShiftResponse';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData, ChartOptions } from 'chart.js';
+import type ShiftResponse from '../../types/ShiftResponse';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, type ChartData, type ChartOptions } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Form, Select, Card, Row, Col } from 'antd';
-import ChartResponse from '../../types/ChatResponse';
+import type ChartResponse from '../../types/ChatResponse';
 import moment from 'moment';
 import { formatCurrency } from '../../services/format';
 
@@ -70,7 +70,7 @@ const HomePage = () => {
           datasets: [{
             label: t('amount'),
             data: res.map(x => x.value),
-            backgroundColor: res.map(x => generateRandomColor()),
+            backgroundColor: res.map(_ => generateRandomColor()),
           }],
         });
       });
@@ -82,7 +82,7 @@ const HomePage = () => {
           datasets: [{
             label: t('amount'),
             data: res.map(x => x.value),
-            backgroundColor: res.map(x => generateRandomColor()),
+            backgroundColor: res.map(_ => generateRandomColor()),
           }],
         });
       });
@@ -95,7 +95,7 @@ const HomePage = () => {
           datasets: [{
             label: t('amount'),
             data: res.map(x => x.value),
-            backgroundColor: res.map(x => generateRandomColor()),
+            backgroundColor: res.map(_ => generateRandomColor()),
           }],
         });
       });

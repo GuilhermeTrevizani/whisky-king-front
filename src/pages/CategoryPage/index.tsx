@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 import { Button, Input, Form, Checkbox, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
-import CategoryResponse from '../../types/CategoryResponse';
+import type CategoryResponse from '../../types/CategoryResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';

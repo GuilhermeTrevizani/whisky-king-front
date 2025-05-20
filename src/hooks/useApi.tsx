@@ -1,37 +1,37 @@
 import axios from 'axios';
-import PaginationRequest from '../types/PaginationRequest';
-import PaginationResponse from '../types/PaginationResponse';
-import AccessGroupPaginationResponse from '../types/AccessGroupPaginationResponse';
-import LoginResponse from '../types/LoginResponse';
-import ChangePasswordRequest from '../types/ChangePasswordRequest';
-import UserPaginationResponse from '../types/UserPaginationResponse';
-import UserResponse from '../types/UserResponse';
-import CreateUserRequest from '../types/CreateUserRequest';
-import UpdateUserRequest from '../types/UpdateUserRequest';
-import CreateAccessGroupRequest from '../types/CreateAccessGroupRequest';
-import UpdateAccessGroupRequest from '../types/UpdateAccessGroupRequest';
-import PermissionResponse from '../types/PermissionResponse';
-import AccessGroupResponse from '../types/AccessGroupResponse';
-import CategoryPaginationResponse from '../types/CategoryPaginationResponse';
-import CategoryResponse from '../types/CategoryResponse';
-import CreateCategoryRequest from '../types/CreateCategoryRequest';
-import UpdateCategoryRequest from '../types/UpdateCategoryRequest';
-import MerchandisePaginationResponse from '../types/MerchandisePaginationResponse';
-import MerchandiseResponse from '../types/MerchandiseResponse';
-import CreateMerchandiseRequest from '../types/CreateMerchandiseRequest';
-import UpdateMerchandiseRequest from '../types/UpdateMerchandiseRequest';
-import PaymentMethodPaginationResponse from '../types/PaymentMethodPaginationResponse';
-import PaymentMethodResponse from '../types/PaymentMethodResponse';
-import CreatePaymentMethodRequest from '../types/CreatePaymentMethodRequest';
-import UpdatePaymentMethodRequest from '../types/UpdatePaymentMethodRequest';
-import SalePaginationResponse from '../types/SalePaginationResponse';
-import SaleInvoiceResponse from '../types/SaleInvoiceResponse';
-import { CreateSaleRequest } from '../types/CreateSaleRequest';
-import ShiftResponse from '../types/ShiftResponse';
-import ChartResponse from '../types/ChatResponse';
+import type PaginationRequest from '../types/PaginationRequest';
+import type PaginationResponse from '../types/PaginationResponse';
+import type AccessGroupPaginationResponse from '../types/AccessGroupPaginationResponse';
+import type LoginResponse from '../types/LoginResponse';
+import type ChangePasswordRequest from '../types/ChangePasswordRequest';
+import type UserPaginationResponse from '../types/UserPaginationResponse';
+import type UserResponse from '../types/UserResponse';
+import type CreateUserRequest from '../types/CreateUserRequest';
+import type UpdateUserRequest from '../types/UpdateUserRequest';
+import type CreateAccessGroupRequest from '../types/CreateAccessGroupRequest';
+import type UpdateAccessGroupRequest from '../types/UpdateAccessGroupRequest';
+import type PermissionResponse from '../types/PermissionResponse';
+import type AccessGroupResponse from '../types/AccessGroupResponse';
+import type CategoryPaginationResponse from '../types/CategoryPaginationResponse';
+import type CategoryResponse from '../types/CategoryResponse';
+import type CreateCategoryRequest from '../types/CreateCategoryRequest';
+import type UpdateCategoryRequest from '../types/UpdateCategoryRequest';
+import type MerchandisePaginationResponse from '../types/MerchandisePaginationResponse';
+import type MerchandiseResponse from '../types/MerchandiseResponse';
+import type CreateMerchandiseRequest from '../types/CreateMerchandiseRequest';
+import type UpdateMerchandiseRequest from '../types/UpdateMerchandiseRequest';
+import type PaymentMethodPaginationResponse from '../types/PaymentMethodPaginationResponse';
+import type PaymentMethodResponse from '../types/PaymentMethodResponse';
+import type CreatePaymentMethodRequest from '../types/CreatePaymentMethodRequest';
+import type UpdatePaymentMethodRequest from '../types/UpdatePaymentMethodRequest';
+import type SalePaginationResponse from '../types/SalePaginationResponse';
+import type SaleInvoiceResponse from '../types/SaleInvoiceResponse';
+import { type CreateSaleRequest } from '../types/CreateSaleRequest';
+import type ShiftResponse from '../types/ShiftResponse';
+import type ChartResponse from '../types/ChatResponse';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API,
+  baseURL: import.meta.env.VITE_APP_API,
 });
 
 api.interceptors.request.use(
