@@ -52,10 +52,10 @@ const RoutesApp = () => {
       <Route path="*" element={<Navigate to="/" />} />
       <Route path='/login' element={<RequireNonAuth><LoginPage /></RequireNonAuth>}></Route>
       <Route path='/' element={<RequireAuth><HomePage /></RequireAuth>}></Route>
-      <Route path='/changepassword' element={<RequireAuth><ChangePasswordPage /></RequireAuth>}></Route>
-      <Route path='/accessgroups' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupsPage /></RequireAuth>}></Route>
-      <Route path='/accessgroup' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupPage /></RequireAuth>}></Route>
-      <Route path='/accessgroup/:id' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupPage /></RequireAuth>}></Route>
+      <Route path='/change-password' element={<RequireAuth><ChangePasswordPage /></RequireAuth>}></Route>
+      <Route path='/access-groups' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupsPage /></RequireAuth>}></Route>
+      <Route path='/access-group' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupPage /></RequireAuth>}></Route>
+      <Route path='/access-group/:id' element={<RequireAuth permission={Permission.ViewAccessGroups}><AccessGroupPage /></RequireAuth>}></Route>
       <Route path='/users' element={<RequireAuth permission={Permission.ViewUsers}><UsersPage /></RequireAuth>}></Route>
       <Route path='/user' element={<RequireAuth permission={Permission.ViewUsers}><UserPage /></RequireAuth>}></Route>
       <Route path='/user/:id' element={<RequireAuth permission={Permission.ViewUsers}><UserPage /></RequireAuth>}></Route>
@@ -65,9 +65,9 @@ const RoutesApp = () => {
       <Route path='/merchandises' element={<RequireAuth permission={Permission.ViewMerchandises}><MerchandisesPage /></RequireAuth>}></Route>
       <Route path='/merchandise' element={<RequireAuth permission={Permission.ViewMerchandises}><MerchandisePage /></RequireAuth>}></Route>
       <Route path='/merchandise/:id' element={<RequireAuth permission={Permission.ViewMerchandises}><MerchandisePage /></RequireAuth>}></Route>
-      <Route path='/paymentmethods' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodsPage /></RequireAuth>}></Route>
-      <Route path='/paymentmethod' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodPage /></RequireAuth>}></Route>
-      <Route path='/paymentmethod/:id' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodPage /></RequireAuth>}></Route>
+      <Route path='/payment-methods' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodsPage /></RequireAuth>}></Route>
+      <Route path='/payment-method' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodPage /></RequireAuth>}></Route>
+      <Route path='/payment-method/:id' element={<RequireAuth permission={Permission.ViewPaymentMethods}><PaymentMethodPage /></RequireAuth>}></Route>
       <Route path='/sales' element={<RequireAuth permission={Permission.ViewSales}><SalesPage /></RequireAuth>}></Route>
       <Route path='/sale' element={<RequireAuth permission={Permission.ManageSales}><SalePage /></RequireAuth>}></Route>
       <Route path='/sale/invoice/:id' element={<RequireAuth permission={Permission.ViewSales}><SaleInvoicePage /></RequireAuth>}></Route>

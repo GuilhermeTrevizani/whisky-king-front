@@ -29,7 +29,7 @@ const AccessGroupPage = () => {
       }
 
       await api.createAccessGroup({ ...accessGroup });
-      navigate('/accessgroups');
+      navigate('/access-groups');
     } catch (ex: any) {
       notification.alert('error', ex);
     }
@@ -48,7 +48,7 @@ const AccessGroupPage = () => {
         })
         .catch((res) => {
           notification.alert('error', res);
-          navigate('/accessgroup');
+          navigate('/access-groups');
         });
   }, [id]);
 

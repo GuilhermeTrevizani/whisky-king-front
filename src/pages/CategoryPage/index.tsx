@@ -41,7 +41,7 @@ const CategoryPage = () => {
         })
         .catch((res) => {
           notification.alert('error', res);
-          navigate('/category');
+          navigate('/categories');
         });
   }, [id]);
 

@@ -25,7 +25,7 @@ const AccessGroupsPage = () => {
       title: t('id'),
       dataIndex: 'id',
       key: 'id',
-      render: (id: string) => <a onClick={() => navigate(`/accessgroup/${id}`)}>{id}</a>,
+      render: (id: string) => <a onClick={() => navigate(`/access-group/${id}`)}>{id}</a>,
     },
     {
       title: t('name'),
@@ -66,7 +66,7 @@ const AccessGroupsPage = () => {
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
         {user?.permissions.includes(Permission.ManageAccessGroups) &&
           <Row itemType='flex' justify='end' align='middle'>
-            <Button type='primary' onClick={() => navigate('/accessgroup')}>{t('new')}</Button>
+            <Button type='primary' onClick={() => navigate('/access-group')}>{t('new')}</Button>
           </Row>
         }
         <Table

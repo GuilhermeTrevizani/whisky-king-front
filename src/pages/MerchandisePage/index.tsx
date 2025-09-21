@@ -48,7 +48,7 @@ const MerchandisePage = () => {
         })
         .catch((res) => {
           notification.alert('error', res);
-          navigate('/merchandise');
+          navigate('/merchandises');
         });
   }, [id]);
 

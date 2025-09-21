@@ -27,7 +27,7 @@ const PaymentMethodPage = () => {
       }
 
       await api.createPaymentMethod({ ...paymentMethod });
-      navigate('/paymentmethods');
+      navigate('/payment-methods');
     } catch (ex: any) {
       notification.alert('error', ex);
     }
@@ -41,7 +41,7 @@ const PaymentMethodPage = () => {
         })
         .catch((res) => {
           notification.alert('error', res);
-          navigate('/paymentmethod');
+          navigate('/payment-methods');
         });
   }, [id]);
 

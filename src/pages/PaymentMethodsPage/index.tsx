@@ -25,7 +25,7 @@ const PaymentMethodsPage = () => {
       title: t('id'),
       dataIndex: 'id',
       key: 'id',
-      render: (id: string) => <a onClick={() => navigate(`/paymentmethod/${id}`)}>{id}</a>,
+      render: (id: string) => <a onClick={() => navigate(`/payment-method/${id}`)}>{id}</a>,
     },
     {
       title: t('name'),
@@ -66,7 +66,7 @@ const PaymentMethodsPage = () => {
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
         {user?.permissions.includes(Permission.ManagePaymentMethods) &&
           <Row itemType='flex' justify='end' align='middle'>
-            <Button type='primary' onClick={() => navigate('/paymentmethod')}>{t('new')}</Button>
+            <Button type='primary' onClick={() => navigate('/payment-method')}>{t('new')}</Button>
           </Row>
         }
         <Table
