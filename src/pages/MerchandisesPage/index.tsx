@@ -57,7 +57,7 @@ const MerchandisesPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getMerchandisesByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getMerchandisesByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setMerchandises(res.data);
       })

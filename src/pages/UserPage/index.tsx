@@ -3,19 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 import { Button, Input, Form, Checkbox, Select, Alert } from 'antd';
 import { useTranslation } from 'react-i18next';
-import type AccessGroupPaginationResponse from '../../types/AccessGroupPaginationResponse';
 import type UserResponse from '../../types/UserResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
 import { useNotification } from '../../hooks/useNotification';
+import type RecordMinResponse from '../../types/RecordMinResponse';
 
 const UserPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const api = useApi();
   const navigate = useNavigate();
-  const [accessGroups, setAccessGroups] = useState<AccessGroupPaginationResponse[]>();
+  const [accessGroups, setAccessGroups] = useState<RecordMinResponse[]>();
   const [user, setUser] = useState<UserResponse>(null!);
   const authenticatedUser = useAuth().user;
   const notification = useNotification();
@@ -36,9 +36,9 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    api.getAccessGroupsByPagination({ take: 1000, orderColumn: 'name', onlyActive: true })
+    api.getAccessGroupsMinActive()
       .then((res) => {
-        setAccessGroups(res.data);
+        setAccessGroups(res);
       });
 
     if (id)

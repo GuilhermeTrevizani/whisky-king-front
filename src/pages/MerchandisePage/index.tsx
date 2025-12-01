@@ -4,11 +4,11 @@ import { useApi } from '../../hooks/useApi';
 import { Button, Input, Form, Checkbox, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import type MerchandiseResponse from '../../types/MerchandiseResponse';
-import type CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
 import LayoutPage from '../LayoutPage';
 import useAuth from '../../hooks/useAuth';
 import { Permission } from '../../types/Permission';
 import { useNotification } from '../../hooks/useNotification';
+import type RecordMinResponse from '../../types/RecordMinResponse';
 
 const MerchandisePage = () => {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ const MerchandisePage = () => {
   const api = useApi();
   const navigate = useNavigate();
   const [merchandise, setMerchandise] = useState<MerchandiseResponse>(null!);
-  const [categories, setCategories] = useState<CategoryPaginationResponse[]>();
+  const [categories, setCategories] = useState<RecordMinResponse[]>();
   const { user } = useAuth();
   const notification = useNotification();
 
@@ -36,9 +36,9 @@ const MerchandisePage = () => {
   };
 
   useEffect(() => {
-    api.getCategoriesByPagination({ take: 1000, orderColumn: 'name', onlyActive: true })
+    api.getCategoriesMinActive()
       .then((res) => {
-        setCategories(res.data);
+        setCategories(res);
       });
 
     if (id)

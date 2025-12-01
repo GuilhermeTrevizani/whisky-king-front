@@ -52,7 +52,7 @@ const SalesPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getSalesByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getSalesByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setSales(res.data);
       })

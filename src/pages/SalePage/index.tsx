@@ -5,7 +5,6 @@ import { Button, Input, Form, Table, Select, Divider, Row, Col, Popconfirm, Auto
 import { useTranslation } from 'react-i18next';
 import { type CreateSaleRequestMerchandise, type CreateSaleRequestPaymentMethod } from '../../types/CreateSaleRequest';
 import type MerchandisePaginationResponse from '../../types/MerchandisePaginationResponse';
-import type PaymentMethodPaginationResponse from '../../types/PaymentMethodPaginationResponse';
 import type ShiftResponse from '../../types/ShiftResponse';
 import moment from 'moment';
 import { type ColumnsType } from 'antd/es/table';
@@ -14,6 +13,7 @@ import { SaveOutlined, DeleteOutlined } from '@ant-design/icons';
 import LayoutPage from '../LayoutPage';
 import type CategoryPaginationResponse from '../../types/CategoryPaginationResponse';
 import { useNotification } from '../../hooks/useNotification';
+import type RecordMinResponse from '../../types/RecordMinResponse';
 
 const SalePage = () => {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ const SalePage = () => {
   });
   const [selectedMerchandisePrice, setSelectedMerchandisePrice] = useState(0);
 
-  const [paymentMethods, setPaymentMethods] = useState<PaymentMethodPaginationResponse[]>();
+  const [paymentMethods, setPaymentMethods] = useState<RecordMinResponse[]>();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<CreateSaleRequestPaymentMethod>({
     paymentMethodId: '',
     value: 0
@@ -267,19 +267,19 @@ const SalePage = () => {
         setShift(res?.id ? res : null);
       });
 
-    api.getMerchandisesByPagination({ take: 1000, orderColumn: 'name', onlyActive: true })
+    api.getMerchandisesByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then((res) => {
         setMerchandises(res.data);
         setCategoryMerchandises(res.data);
         handleChangePaymentMethod('');
       });
 
-    api.getPaymentMethodsByPagination({ take: 1000, orderColumn: 'name', onlyActive: true })
+    api.getPaymentMethodsMinActive()
       .then((res) => {
-        setPaymentMethods(res.data);
+        setPaymentMethods(res);
       });
 
-    api.getCategoriesByPagination({ take: 1000, orderColumn: 'name', onlyActive: true })
+    api.getCategoriesByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then((res) => {
         setCategories(res.data);
       });

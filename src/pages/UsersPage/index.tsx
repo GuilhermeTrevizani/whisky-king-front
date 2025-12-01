@@ -54,7 +54,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getUserByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getUserByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setUsers(res.data);
       })

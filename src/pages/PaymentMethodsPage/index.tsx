@@ -49,7 +49,7 @@ const PaymentMethodsPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getPaymentMethodsByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getPaymentMethodsByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setPaymentMethods(res.data);
       })

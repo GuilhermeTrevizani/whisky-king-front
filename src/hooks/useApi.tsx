@@ -1,5 +1,4 @@
 import axios from 'axios';
-import type PaginationRequest from '../types/PaginationRequest';
 import type PaginationResponse from '../types/PaginationResponse';
 import type AccessGroupPaginationResponse from '../types/AccessGroupPaginationResponse';
 import type LoginResponse from '../types/LoginResponse';
@@ -29,6 +28,13 @@ import type SaleInvoiceResponse from '../types/SaleInvoiceResponse';
 import { type CreateSaleRequest } from '../types/CreateSaleRequest';
 import type ShiftResponse from '../types/ShiftResponse';
 import type ChartResponse from '../types/ChatResponse';
+import type UserPaginationRequest from '../types/UserPaginationRequest';
+import type AccessGroupPaginationRequest from '../types/AccessGroupPaginationRequest';
+import type CategoryPaginationRequest from '../types/CategoryPaginationRequest';
+import type MerchandisePaginationRequest from '../types/PaymentMethodPaginationRequest';
+import type PaymentMethodPaginationRequest from '../types/PaymentMethodPaginationRequest';
+import type SalePaginationRequest from '../types/SalePaginationRequest';
+import type RecordMinResponse from '../types/RecordMinResponse';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_APP_API,
@@ -82,7 +88,7 @@ export const useApi = () => ({
   changePassword: async (request: ChangePasswordRequest) => {
     await api.put('/users/change-password', request);
   },
-  getUserByPagination: async (request: PaginationRequest) => {
+  getUserByPagination: async (request: UserPaginationRequest) => {
     const response = await api.get<PaginationResponse<UserPaginationResponse>>('/users/pagination', { params: request });
     return response.data;
   },
@@ -101,7 +107,7 @@ export const useApi = () => ({
     const response = await api.get<PermissionResponse[]>('/permissions');
     return response.data;
   },
-  getAccessGroupsByPagination: async (request: PaginationRequest) => {
+  getAccessGroupsByPagination: async (request: AccessGroupPaginationRequest) => {
     const response = await api.get<PaginationResponse<AccessGroupPaginationResponse>>('/access-groups/pagination', { params: request });
     return response.data;
   },
@@ -116,7 +122,7 @@ export const useApi = () => ({
   updateAccessGroup: async (request: UpdateAccessGroupRequest) => {
     await api.put('/access-groups', request);
   },
-  getCategoriesByPagination: async (request: PaginationRequest) => {
+  getCategoriesByPagination: async (request: CategoryPaginationRequest) => {
     const response = await api.get<PaginationResponse<CategoryPaginationResponse>>('/categories/pagination', { params: request });
     return response.data;
   },
@@ -131,7 +137,7 @@ export const useApi = () => ({
   updateCategory: async (request: UpdateCategoryRequest) => {
     await api.put('/categories', request);
   },
-  getMerchandisesByPagination: async (request: PaginationRequest) => {
+  getMerchandisesByPagination: async (request: MerchandisePaginationRequest) => {
     const response = await api.get<PaginationResponse<MerchandisePaginationResponse>>('/merchandises/pagination', { params: request });
     return response.data;
   },
@@ -146,7 +152,7 @@ export const useApi = () => ({
   updateMerchandise: async (request: UpdateMerchandiseRequest) => {
     await api.put('/merchandises', request);
   },
-  getPaymentMethodsByPagination: async (request: PaginationRequest) => {
+  getPaymentMethodsByPagination: async (request: PaymentMethodPaginationRequest) => {
     const response = await api.get<PaginationResponse<PaymentMethodPaginationResponse>>('/payment-methods/pagination', { params: request });
     return response.data;
   },
@@ -161,7 +167,7 @@ export const useApi = () => ({
   updatePaymentMethod: async (request: UpdatePaymentMethodRequest) => {
     await api.put('/payment-methods', request);
   },
-  getSalesByPagination: async (request: PaginationRequest) => {
+  getSalesByPagination: async (request: SalePaginationRequest) => {
     const response = await api.get<PaginationResponse<SalePaginationResponse>>('/sales/pagination', { params: request });
     return response.data;
   },
@@ -198,6 +204,22 @@ export const useApi = () => ({
   },
   get10PaymentMethodMostUsed: async (shiftId?: string) => {
     const response = await api.get<ChartResponse[]>(`/payment-methods/10-most-used?shiftId=${shiftId}`);
+    return response.data;
+  },
+  getAccessGroupsMinActive: async () => {
+    const response = await api.get<RecordMinResponse[]>(`/access-groups/min-active`);
+    return response.data;
+  },
+  getCategoriesMinActive: async () => {
+    const response = await api.get<RecordMinResponse[]>(`/categories/min-active`);
+    return response.data;
+  },
+  getPaymentMethodsMinActive: async () => {
+    const response = await api.get<RecordMinResponse[]>(`/payment-methods/min-active`);
+    return response.data;
+  },
+  getMerchandisesMinActive: async () => {
+    const response = await api.get<RecordMinResponse[]>(`/merchandises/min-active`);
     return response.data;
   },
 });

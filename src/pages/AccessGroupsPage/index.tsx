@@ -49,7 +49,7 @@ const AccessGroupsPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getAccessGroupsByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getAccessGroupsByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setAccessGroups(res.data);
       })

@@ -48,7 +48,7 @@ const CategoriesPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    api.getCategoriesByPagination({ take: 1000, orderColumn: 'registerDate', orderDescending: true })
+    api.getCategoriesByPagination({ pageNumber: 1, pageSize: 1000, orderAsc: false })
       .then(res => {
         setCategories(res.data);
       })
